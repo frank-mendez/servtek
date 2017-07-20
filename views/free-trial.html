@@ -1,0 +1,49 @@
+<div class="free-trial-page">
+    <div class="container">
+        <div class="row free-trial-row">
+            <div class="col-sm-6 div col-sm-offset-3 text-center">
+                <h1 class="free-trial-heading">Start your free trial.</h1>
+                <p class="credit">All the features, all the support, and no credit card required.</p>
+                <div class="trial-buttons text-center">
+                    <button type="button" class="btn btn-primary btn-lg btn-block google-btn">
+                        <span>
+                            <img class="img-responsive google" src="img/google.svg" alt="">
+                        </span>
+                        Sign up with Google
+                    </button>
+                    <div class="divider-bottom"></div>
+                    <p class="or">or</p>
+                    <form name="signupForm" class="form-horizontal">
+                        <div ng-class="{'has-error': signupForm.$invalid && signupForm.$dirty}" class="form-group">
+                            <div class="col-sm-12">
+                            <label ng-show="signupForm.$invalid && signupForm.$dirty" class="control-label" for="inputError1">Needs to be a valid email address</label>
+                            <input type="email" ng-model="email" class="form-control input-lg " placeholder="Email" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                            <input type="text" ng-model="fullName" class="form-control input-lg" placeholder="Full Name" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                            <input type="text" ng-model="companyName" class="form-control input-lg" placeholder="Company Name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                            <input type="password" ng-model="password" class="form-control input-lg" placeholder="Password" required>
+                            </div>
+                        </div>
+                    </form>
+                    <button type="submit" ng-click="submit()" ng-disabled="signupForm.$invalid"
+                            class="btn btn-success btn-lg btn-block start-now-btn">Start Now
+                    </button>
+                </div>
+                <p>By continuing you are agreeing to our <a href="">Terms of service</a> and <a href=""> Privacy policy</a>.</p>
+                <div class="divider-bottom"></div>
+                <p>Already have an account? <a href="">Log in Here</a></p>
+            </div>
+        </div>
+    </div>
+</div>
