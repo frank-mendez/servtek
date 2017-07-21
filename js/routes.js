@@ -24,6 +24,14 @@
                 .when('/signup', {
                     templateUrl: 'views/free-trial.html',
                     controller: 'SignUpController',
+                })
+                .when('/login', {
+                    templateUrl: 'views/login.html',
+                    controller: 'LoginController',
+                })
+                .when('/logout', {
+                    templateUrl: 'views/login.html',
+                    controller: 'LogoutController',
                 });
 
         });

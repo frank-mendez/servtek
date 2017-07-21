@@ -16,6 +16,17 @@
             $('#navbar').removeClass('results-nav');
             $('#navbar').removeClass('hidden');
             $('#footer').removeClass('hidden');
+            firebase.auth().onAuthStateChanged(function(user) {
+                if (user) {
+                    console.log('user is signed in');
+                    $('#login').addClass('hidden');
+                    $('#logout').removeClass('hidden');
+                } else {
+                    console.log('user is signed out');
+                    $('#login').removeClass('hidden');
+                    $('#logout').addClass('hidden');
+                }
+            });
         }
 
         $scope.videoModal();

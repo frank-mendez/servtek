@@ -1,11 +1,18 @@
 <div class="free-trial-page">
     <div class="container">
         <div class="row free-trial-row">
-            <div class="col-sm-6 div col-sm-offset-3 text-center">
+            <div id="success-signup" class="col-sm-6 col-sm-offset-3 text-center hidden">
+                <div class="alert alert-success" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <strong>Well Done!</strong> You have successfully sign up and logged in.
+                    <a href="#!login" class="alert-link">Home</a>
+                </div>
+            </div>
+            <div id="sign-up-container" class="col-sm-6 div col-sm-offset-3 text-center">
                 <h1 class="free-trial-heading">Start your free trial.</h1>
                 <p class="credit">All the features, all the support, and no credit card required.</p>
                 <div class="trial-buttons text-center">
-                    <button type="button" class="btn btn-primary btn-lg btn-block google-btn">
+                    <button type="button" ng-click="signupGoogle()" class="btn btn-primary btn-lg btn-block google-btn">
                         <span>
                             <img class="img-responsive google" src="img/google.svg" alt="">
                         </span>
@@ -42,7 +49,7 @@
                 </div>
                 <p>By continuing you are agreeing to our <a href="">Terms of service</a> and <a href=""> Privacy policy</a>.</p>
                 <div class="divider-bottom"></div>
-                <p>Already have an account? <a href="">Log in Here</a></p>
+                <p>Already have an account? <a href="#!login">Log in Here</a></p>
             </div>
         </div>
     </div>
