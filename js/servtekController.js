@@ -5,28 +5,16 @@
         .module('servtek')
         .controller('ServTekController', ServTekController);
     
-    function ServTekController($scope) {
+    function ServTekController($scope, $rootScope) {
         
         $scope.videoModal = function() {
             $(".js-modal-btn").modalVideo();
         }
 
         $scope.init = function(){
-            $('#navbar').removeClass('feature-nav');
-            $('#navbar').removeClass('results-nav');
-            $('#navbar').removeClass('hidden');
-            $('#footer').removeClass('hidden');
-            firebase.auth().onAuthStateChanged(function(user) {
-                if (user) {
-                    console.log('user is signed in');
-                    $('#login').addClass('hidden');
-                    $('#logout').removeClass('hidden');
-                } else {
-                    console.log('user is signed out');
-                    $('#login').removeClass('hidden');
-                    $('#logout').addClass('hidden');
-                }
-            });
+            $rootScope.nav = true;
+            $rootScope.footer = true;
+            $rootScope.page = '';
         }
 
         $scope.videoModal();

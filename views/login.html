@@ -4,9 +4,9 @@
             <div class="col-sm-6 div col-sm-offset-3 text-center">
                 <h1 class="free-trial-heading">Login</h1>
                 <div class="trial-buttons text-center">
-                    <div id="login-error" class="alert alert-danger alert-dismissible hidden" role="alert">
+                    <div ng-if="error" id="login-error" class="alert alert-danger alert-dismissible" role="alert">
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <strong>Error!</strong> {{ error }}.
+                        <strong>Error!</strong> {{ errorMessage }}.
                     </div>
                     <button type="button" ng-click="loginwithGoogle()" class="btn btn-primary btn-lg btn-block google-btn">
                         <span>
@@ -17,15 +17,15 @@
                     <div class="divider-bottom"></div>
                     <p class="or">or</p>
                     <form name="loginForm" class="form-horizontal">
-                        <div ng-class="{'has-error': loginForm.$invalid && loginForm.$dirty}" class="form-group">
+                        <div ng-class="{'has-error': loginForm.email.$invalid && loginForm.email.$dirty}" class="form-group">
                             <div class="col-sm-12">
-                            <label ng-show="loginForm.$invalid && loginForm.$dirty" class="control-label" for="inputError1">Needs to be a valid email address</label>
-                            <input type="email" ng-model="email" class="form-control input-lg " placeholder="Email" required>
+                            <label ng-show="loginForm.email.$invalid && loginForm.email.$dirty" class="control-label" for="inputError1">Needs to be a valid email address</label>
+                            <input type="email" name="email" ng-model="input.email" class="form-control input-lg " placeholder="Email" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-sm-12">
-                            <input type="password" ng-model="password" class="form-control input-lg" placeholder="Password" required>
+                            <input type="password" ng-model="input.password" class="form-control input-lg" placeholder="Password" required>
                             </div>
                         </div>
                     </form>

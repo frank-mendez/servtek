@@ -5,37 +5,39 @@
         .module('servtek')
         .controller('SignUpController', SignUpController);
     
-    function SignUpController($scope) {
+    function SignUpController($scope, $rootScope) {
 
         $scope.init = function() {
-
-            $scope.email = '';
-            $scope.fullName = '';
-            $scope.companyName = '';
-            $scope.password = '';
-
-            $('#navbar').addClass('hidden');
-            $('#footer').addClass('hidden');
+            $scope.success = false;
+            $rootScope.loggedin = false;
+            $scope.input = {
+                 email: '',
+                 fullName: '',
+                 companyName: '',
+                 password: '',
+            };
+            $rootScope.nav = false;
+            $rootScope.footer = false;
         }
 
         $scope.submit = function(){
-            // console.log('email: ', $scope.email);
-            // console.log('fullName: ', $scope.fullName);
-            // console.log('companyName: ', $scope.companyName);
-            // console.log('password: ', $scope.password);
-            firebase.auth().createUserWithEmailAndPassword($scope.email, $scope.password)
+            firebase.auth().createUserWithEmailAndPassword($scope.input.email, $scope.input.password)
             .then(function(result){
-                console.log(result);
                 if(result) {
-                    $('#sign-up-container').addClass('hidden');
-                    $('#success-signup').removeClass('hidden');
+                    $scope.success = true;
+                    $rootScope.loggedin = true;
+                    $scope.$apply();
                 }
             })
             .catch(function(error) {
                 // Handle Errors here.
-                var errorCode = error.code;
-                var errorMessage = error.message;
-                console.log('errorMessage');
+                if(error) {
+                    var errorCode = error.code;
+                    var errorMessage = error.message;
+                    $scope.error = true;
+                    $scope.errorMessage = errorMessage;
+                    $scope.$apply();
+                }
                 // ...
             });
         }
@@ -49,8 +51,8 @@
             // The signed-in user info.
             var user = result.user;
             if(user) {
-                $('#sign-up-container').addClass('hidden');
-                $('#success-signup').removeClass('hidden');
+                $scope.success = true;
+                $scope.$apply();
             }
             // ...
             }).catch(function(error) {

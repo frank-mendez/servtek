@@ -1,17 +1,21 @@
 <div class="free-trial-page">
     <div class="container">
         <div class="row free-trial-row">
-            <div id="success-signup" class="col-sm-6 col-sm-offset-3 text-center hidden">
+            <div ng-if="success" id="success-signup" class="col-sm-6 col-sm-offset-3 text-center">
                 <div class="alert alert-success" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <strong>Well Done!</strong> You have successfully sign up and logged in.
                     <a href="#!login" class="alert-link">Home</a>
                 </div>
             </div>
-            <div id="sign-up-container" class="col-sm-6 div col-sm-offset-3 text-center">
+            <div ng-if="!success" id="sign-up-container" class="col-sm-6 div col-sm-offset-3 text-center">
                 <h1 class="free-trial-heading">Start your free trial.</h1>
                 <p class="credit">All the features, all the support, and no credit card required.</p>
                 <div class="trial-buttons text-center">
+                    <div ng-if="error" class="alert alert-danger alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <strong>Error!</strong> {{ errorMessage }}.
+                    </div>
                     <button type="button" ng-click="signupGoogle()" class="btn btn-primary btn-lg btn-block google-btn">
                         <span>
                             <img class="img-responsive google" src="img/google.svg" alt="">
@@ -21,15 +25,15 @@
                     <div class="divider-bottom"></div>
                     <p class="or">or</p>
                     <form name="signupForm" class="form-horizontal">
-                        <div ng-class="{'has-error': signupForm.$invalid && signupForm.$dirty}" class="form-group">
+                        <div ng-class="{'has-error': signupForm.email.$invalid && signupForm.email.$dirty}" class="form-group">
                             <div class="col-sm-12">
-                            <label ng-show="signupForm.$invalid && signupForm.$dirty" class="control-label" for="inputError1">Needs to be a valid email address</label>
-                            <input type="email" ng-model="email" class="form-control input-lg " placeholder="Email" required>
+                            <label ng-show="signupForm.email.$invalid && signupForm.email.$dirty" class="control-label" for="inputError1">Needs to be a valid email address</label>
+                            <input type="email" name="email" ng-model="input.email" class="form-control input-lg " placeholder="Email" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-sm-12">
-                            <input type="text" ng-model="fullName" class="form-control input-lg" placeholder="Full Name" required>
+                            <input type="text" ng-model="input.fullName" class="form-control input-lg" placeholder="Full Name" required>
                             </div>
                         </div>
                         <div class="form-group">
@@ -39,7 +43,7 @@
                         </div>
                         <div class="form-group">
                             <div class="col-sm-12">
-                            <input type="password" ng-model="password" class="form-control input-lg" placeholder="Password" required>
+                            <input type="password" ng-model="input.password" class="form-control input-lg" placeholder="Password" required>
                             </div>
                         </div>
                     </form>

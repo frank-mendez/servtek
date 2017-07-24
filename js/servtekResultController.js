@@ -5,12 +5,11 @@
         .module('servtek')
         .controller('servtekResultController', servtekResultController);
 
-    function servtekResultController($scope) {
+    function servtekResultController($scope, $rootScope) {
         $scope.init = function(){
-            $('#navbar').addClass('results-nav');
-            $('#navbar').removeClass('feature-nav');
-            $('#navbar').removeClass('hidden');
-            $('#footer').removeClass('hidden');
+            $rootScope.nav = true;
+            $rootScope.footer = true;
+            $rootScope.page = 'results-nav';
         }
         $scope.init();
 

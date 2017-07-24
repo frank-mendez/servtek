@@ -5,32 +5,32 @@
         .module('servtek')
         .controller('LoginController', LoginController);
 
-    function LoginController($scope, $location) {
+    function LoginController($scope, $location, $rootScope) {
         
         $scope.init = function() {
-            $('#navbar').addClass('hidden');
-            $('#footer').addClass('hidden');
-            $scope.email = '';
-            $scope.password = '';
+            $scope.input = {
+                email: '',
+                password: ''
+            }
             $scope.auth();
+            $rootScope.nav = false;
+            $rootScope.footer = false;
         }
 
         $scope.auth = function() {
             firebase.auth().onAuthStateChanged(function(user) {
                 if (user) {
-                    console.log('user is signed in');
+                    $rootScope.loggedin = true;
                     $location.path('/');
                     $scope.$apply();
                 } else {
-                    console.log('user is signed out');
+                    $rootScope.loggedin = false;
                 }
             });
         }
 
         $scope.submit = function() {
-            console.log('email', $scope.email);
-            console.log('password', $scope.password);
-            firebase.auth().signInWithEmailAndPassword($scope.email, $scope.password)
+            firebase.auth().signInWithEmailAndPassword($scope.input.email, $scope.input.password)
             .then(function(results) {
                 if(results) {
                     $location.path('/');
@@ -41,10 +41,9 @@
                 // Handle Errors here.
                 var errorCode = error.code;
                 var errorMessage = error.message;
-                $('#login-error').removeClass('hidden');
-                $scope.error = errorMessage;
+                $scope.error = true;
+                $scope.errorMessage = errorMessage;
                 $scope.$apply();
-                console.log(error);
                 // ...
             });
         }
